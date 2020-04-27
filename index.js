@@ -16,18 +16,17 @@
  limitations under the License.
  */
 
-const logger = new (require(global.PATH.mainDir + '/modules/logger'))("ShardedDbPlugin");
+const logger = new (require(global.PATH.mainDir + '/modules/logger'))("LevelSharded");
 const path = require('path');
 
 const PROTOCOL_PREFIX = 'levelsharded';
 
 module.exports = function register(blockchain, config, storj) {
-    logger.info('Initialize sharded DB');
+    logger.info('Initialize sharded LevelDB');
 
     let plugins = storj.get('plugins');
-    //console.log(JSON.stringify(plugins));
-    //console.log(plugins);
+
     plugins.db.registerModule(PROTOCOL_PREFIX, __dirname + path.sep + 'shardedDB.js');
-    //console.log(plugins);
+
     logger.info('OK');
 };
